@@ -1,0 +1,86 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex, nofollow, noarchive, nosnippet, noimageindex">
+<meta name="googlebot" content="noindex, nofollow, noarchive, nosnippet, noimageindex">
+<meta name="bingbot" content="noindex, nofollow, noarchive, nosnippet, noimageindex">
+<title>Ascend Ortho Regen page: review copy</title>
+<style>
+  * { box-sizing: border-box; }
+  body { margin: 0; font-family: system-ui, -apple-system, "Segoe UI", sans-serif; background: #1f2024; color: #eee; min-height: 100vh; display: flex; flex-direction: column; }
+  header { display: flex; align-items: center; gap: 14px; padding: 10px 16px; background: #2d2e34; border-bottom: 1px solid #3a3b42; flex-wrap: wrap; }
+  header h1 { font-size: 15px; margin: 0 12px 0 0; font-weight: 600; }
+  nav { display: flex; gap: 6px; flex-wrap: wrap; }
+  nav button { background: #3a3b42; color: #ddd; border: 1px solid #4a4b53; border-radius: 8px; padding: 6px 12px; cursor: pointer; text-align: left; font-size: 13px; line-height: 1.25; }
+  nav button span { display: block; font-size: 11px; opacity: .65; }
+  nav button.on { background: #1f6591; border-color: #1f6591; color: #fff; }
+  .right { margin-left: auto; display: flex; gap: 10px; align-items: center; }
+  .seg { display: flex; border: 1px solid #4a4b53; border-radius: 8px; overflow: hidden; }
+  .seg button { background: #3a3b42; color: #ddd; border: 0; padding: 7px 14px; cursor: pointer; font-size: 13px; }
+  .seg button.on { background: #fff; color: #111; }
+  .open { color: #ddd; font-size: 13px; text-decoration: underline; }
+  .note { background: #2b3a2f; color: #bfe6c8; font-size: 12px; padding: 6px 16px; }
+  main { flex: 1; overflow: auto; display: flex; justify-content: center; align-items: flex-start; padding: 18px; gap: 24px; }
+  .frame { background: #fff; border-radius: 6px; overflow: hidden; box-shadow: 0 8px 30px rgba(0,0,0,.45); flex: 0 0 auto; }
+  .frame iframe { border: 0; display: block; }
+  .phone { border-radius: 34px; border: 10px solid #111; background: #111; }
+  .phone iframe { border-radius: 24px; background: #fff; width: 100%; height: 100%; }
+  .wrap { flex: 0 0 auto; }
+  .cap { font-size: 11px; opacity: .6; margin: 0 0 6px; }
+</style>
+</head>
+<body>
+<header>
+  <h1>Ascend Ortho Regen page</h1>
+  <nav id="nav">
+    <button data-p="index.html"><b>Main page</b><span>Joint and back pain</span></button>
+    <button data-p="index.html?seg=knee"><b>Knee</b><span>?seg=knee</span></button>
+    <button data-p="index.html?seg=hip"><b>Hip</b><span>?seg=hip</span></button>
+    <button data-p="index.html?seg=back"><b>Back</b><span>?seg=back</span></button>
+    <button data-p="index.html?seg=shoulder"><b>Shoulder</b><span>?seg=shoulder</span></button>
+  </nav>
+  <div class="right">
+    <a class="open" id="open" target="_blank" rel="noopener">Open page in new tab</a>
+    <div class="seg" id="seg"><button data-v="desktop" class="on">Desktop</button><button data-v="mobile">Mobile</button><button data-v="both">Both</button></div>
+  </div>
+</header>
+<div class="note">Review copy. The lead form is switched off here, so nothing you click creates a lead.</div>
+<main id="main"></main>
+<script>
+var cur = 'index.html', view = 'desktop';
+try { cur = localStorage.getItem('asc_p') || cur; view = localStorage.getItem('asc_v') || view; } catch (e) {}
+if (!document.querySelector('#nav button[data-p="' + cur + '"]')) cur = 'index.html';
+function el(t, c) { var e = document.createElement(t); if (c) e.className = c; return e; }
+function save(k, v) { try { localStorage.setItem(k, v); } catch (e) {} }
+function render() {
+  var m = document.getElementById('main'); m.innerHTML = '';
+  document.querySelectorAll('#nav button').forEach(function (b) { b.classList.toggle('on', b.dataset.p === cur); });
+  document.querySelectorAll('#seg button').forEach(function (b) { b.classList.toggle('on', b.dataset.v === view); });
+  document.getElementById('open').href = 'pages/' + cur;
+  var availH = Math.max(window.innerHeight - 140, 420);
+  var showD = view !== 'mobile', showM = view !== 'desktop';
+  var phoneW = 410, phoneH = Math.min(864, availH);
+  var availW = m.clientWidth - 36 - (showD && showM ? 24 : 0);
+  if (showD) {
+    var dw = 1440, scale = Math.min(1, (showM ? availW - phoneW : availW) / dw);
+    var w = el('div', 'wrap'), cap = el('p', 'cap'); cap.textContent = 'Desktop (1440 wide, scaled to fit)'; w.appendChild(cap);
+    var f = el('div', 'frame'); f.style.width = dw * scale + 'px'; f.style.height = availH + 'px';
+    var i1 = document.createElement('iframe'); i1.src = 'pages/' + cur; i1.title = 'Desktop view';
+    i1.style.width = dw + 'px'; i1.style.height = Math.round(availH / scale) + 'px'; i1.style.transform = 'scale(' + scale + ')'; i1.style.transformOrigin = '0 0';
+    f.appendChild(i1); w.appendChild(f); m.appendChild(w);
+  }
+  if (showM) {
+    var w2 = el('div', 'wrap'), cap2 = el('p', 'cap'); cap2.textContent = 'Mobile (390 wide)'; w2.appendChild(cap2);
+    var f2 = el('div', 'frame phone'); f2.style.width = phoneW + 'px'; f2.style.height = phoneH + 'px';
+    var i2 = document.createElement('iframe'); i2.src = 'pages/' + cur; i2.title = 'Mobile view'; f2.appendChild(i2); w2.appendChild(f2); m.appendChild(w2);
+  }
+}
+document.getElementById('nav').addEventListener('click', function (e) { var b = e.target.closest('button'); if (!b) return; cur = b.dataset.p; save('asc_p', cur); render(); });
+document.getElementById('seg').addEventListener('click', function (e) { var b = e.target.closest('button'); if (!b) return; view = b.dataset.v; save('asc_v', view); render(); });
+window.addEventListener('resize', function () { clearTimeout(window._t); window._t = setTimeout(render, 200); });
+render();
+</script>
+</body>
+</html>
