@@ -3,6 +3,11 @@
 html{scroll-behavior:smooth;scroll-padding-top:96px}
 body{margin:0;font-size:18px;line-height:1.7;background:var(--white)}
 body.modal-open{overflow:hidden}
+/* Inside GHL the page sits in a section, row and column: rows are capped at 1170px and each adds padding,
+   so the bands stopped short of the screen edge. This opens up only the GHL wrappers that hold the page;
+   outside GHL it matches nothing. The page is one block because GHL lays custom-code children out as a row. */
+.c-section:has(.ascend-page),.c-section :has(.ascend-page){max-width:none!important;width:100%!important;margin:0!important;padding:0!important}
+.ascend-page{display:block;width:100%;flex:0 0 100%}
 button{font:inherit;cursor:pointer}
 a{color:inherit}
 button:focus-visible,a:focus-visible,summary:focus-visible{outline:3px solid #bf801b;outline-offset:4px}
