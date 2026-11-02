@@ -32,10 +32,9 @@ h3{font-size:21px;line-height:1.45;letter-spacing:-.01em}
 /* 1. Header */
 .header{height:76px;background:var(--navy);position:sticky;top:0;z-index:40;border-bottom:1px solid #ffffff26}
 .header-inner{height:100%;display:flex;align-items:center;justify-content:space-between;gap:24px}
-.brand{display:flex;align-items:center;gap:10px;text-decoration:none}
-.brand img{width:52px;height:52px;object-fit:contain}
-.brand-name{font-size:22px;letter-spacing:.11em;color:#fff;line-height:1.1;font-weight:500}
-.brand-name small{display:block;font-size:10px;letter-spacing:.23em;margin-top:6px}
+/* the logo is Vijay's GHL file (184x103, white lettering for the navy header); the link's aria-label names it */
+.brand{display:flex;align-items:center;text-decoration:none}
+.brand img{height:64px;width:auto}
 
 /* 2. Hero */
 .hero{background:var(--cream);padding:64px 0 72px}
@@ -179,9 +178,7 @@ dialog::backdrop{background:#102235a8;backdrop-filter:blur(4px)}
 @media(max-width:640px){
   .header{height:68px}
   .header .button{display:none}
-  .brand img{width:44px;height:44px}
-  .brand-name{font-size:20px;letter-spacing:.08em}
-  .brand-name small{font-size:9px;letter-spacing:.16em;margin-top:5px}
+  .brand img{height:56px}
   html{scroll-padding-top:84px}
   .mobile-cta{display:block;position:fixed;bottom:0;left:0;right:0;z-index:45;background:#ffffffed;backdrop-filter:blur(10px);border-top:1px solid var(--line);padding:10px 20px calc(10px + env(safe-area-inset-bottom))}
   .mobile-cta .button{width:100%;min-height:54px;font-size:16px;padding-block:12px}
