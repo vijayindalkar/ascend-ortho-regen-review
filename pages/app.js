@@ -39,4 +39,7 @@ if (Object.hasOwn(variants, segment)) {
   document.querySelector('#problem-list').replaceChildren(...listItems(variant.bullets));
   document.querySelector('#outcomes').replaceChildren(...listItems(variant.outcomes));
   document.querySelector('#final-title').textContent = variant.final;
+  const heroImage = document.querySelector('#hero-image');
+  heroImage.src = `assets/anatomy-${segment}.webp`;
+  heroImage.alt = `Illustration of ${segment === 'back' ? 'lower back' : segment} anatomy with the painful area highlighted`;
 }
